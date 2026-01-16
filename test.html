@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Süper Kahraman Komitesi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        /* LOGO YERI - Buraya ana logo gelecek */
+        .hero-logo {
+            width: 200px;
+            height: 200px;
+            margin: 30px auto;
+            background-image: url('logo.png'); /* LOGO PNG BURAYA */
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* ABOUT SECTION */
+        .about {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            text-align: center;
+        }
+
+        .about h2 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+        }
+
+        .about p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* TEAM SECTION */
+        .team {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .team h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 60px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-member {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 3px solid rgba(255,255,255,0.3);
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* FOTOĞRAF YERİ - Her üyenin fotoğrafı buraya gelecek */
+        .member-photo {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 20px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Her üyenin fotoğrafı için ayrı class'lar */
+        .photo1 { background-image: url('foto1.png'); } /* KAHRAMAN 1 FOTOĞRAFI */
+        .photo2 { background-image: url('foto2.png'); } /* KAHRAMAN 2 FOTOĞRAFI */
+        .photo3 { background-image: url('foto3.png'); } /* KAHRAMAN 3 FOTOĞRAFI */
+        .photo4 { background-image: url('foto4.png'); } /* KAHRAMAN 4 FOTOĞRAFI */
+
+        .team-member h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .team-member .role {
+            font-size: 1.1rem;
+            color: #ffe66d;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .team-member p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.9);
+        }
+
+        /* GALLERY SECTION */
+        .gallery {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .gallery h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 60px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* FOTOĞRAF YERİ - Galeri fotoğrafları buraya gelecek */
+        .gallery-item:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+
+        /* MODAL (POPUP) STYLE */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: #fff;
+            font-size: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 1001;
+        }
+
+        .close:hover {
+            color: #ff6b6b;
+            transform: scale(1.2);
+        }
+
+        /* Galeri fotoğrafları için ayrı class'lar */
+        .gallery1 { background-image: url('aksiyon1.png'); } /* AKSİYON FOTOĞRAF 1 */
+        .gallery2 { background-image: url('aksiyon2.png'); } /* AKSİYON FOTOĞRAF 2 */
+        .gallery3 { background-image: url('aksiyon3.png'); } /* AKSİYON FOTOĞRAF 3 */
+        .gallery4 { background-image: url('aksiyon4.png'); } /* AKSİYON FOTOĞRAF 4 */
+        .gallery5 { background-image: url('aksiyon5.png'); } /* AKSİYON FOTOĞRAF 5 */
+        .gallery6 { background-image: url('aksiyon6.png'); } /* AKSİYON FOTOĞRAF 6 */
+
+        /* MISSION SECTION */
+        .mission {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            text-align: center;
+        }
+
+        .mission h2 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: #333;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+        }
+
+        .mission-content {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.3);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .mission p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 1.1rem;
+        }
+
+        /* SCROLL ANIMATION */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section {
+            animation: fadeInUp 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <!-- ANA LOGO BURAYA GELECEK -->
+        <div class="hero-logo"></div>
+        
+        <h1>SÜPER KAHRAMAN KOMİTESİ</h1>
+        <p>Dünyayı Korumak İçin Bir Aradayız!</p>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about">
+        <h2>Biz Kimiz?</h2>
+        <p>
+            Farklı güçlere sahip kahramanların bir araya gelerek oluşturduğu elit bir ekibiz. 
+            Adaleti sağlamak, masum insanları korumak ve dünyayı daha güvenli bir yer haline 
+            getirmek için gece gündüz mücadele ediyoruz. Her birimiz farklı yeteneklere sahibiz, 
+            ama hepimizin ortak amacı var: kogalı koruymak!
+        </p>
+    </section>
+
+    <!-- TEAM SECTION -->
+    <section class="team">
+        <h2>Ekip Üyelerimiz</h2>
+        <div class="team-grid">
+            <!-- ÜYE 1 - FOTOĞRAF BURAYA -->
+            <div class="team-member">
+                <div class="member-photo photo1"></div>
+                <h3>Zıplayan Adam</h3>
+
+                <div class="role">çok zıplıo</div>
+                <p></p>
+            </div>
+
+            <!-- ÜYE 2 - FOTOĞRAF BURAYA -->
+            <div class="team-member">
+                <div class="member-photo photo2"></div>
+                <h3>120 net</h3>
+
+                <div class="role">doktor oldu</div>
+                <p></p>
+            </div>
+
+            <!-- ÜYE 3 - FOTOĞRAF BURAYA -->
+            <div class="team-member">
+                <div class="member-photo photo3"></div>
+                <h3>Bamtan</h3>
+
+                <div class="role">boş adam</div>
+                <p></p>
+            </div>
+
+            <!-- ÜYE 4 - FOTOĞRAF BURAYA -->
+            <div class="team-member">
+                <div class="member-photo photo4"></div>
+                <h3>Kıvaç</h3>
+                <div class="role">ajan</div>
+                <p></p>
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION - AKSİYONDAN KARELER -->
+    <section class="gallery" id="gallery-section">
+        <h2>⚡ İŞ ÜSTÜNDE ⚡</h2>
+        <div class="gallery-grid">
+            <!-- GALERİ FOTOĞRAF 1 - aksiyon1.png BURAYA -->
+            <div class="gallery-item gallery1" onclick="openModal('aksiyon1.png')">
+                <img src="aksiyon1.png" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+            </div>
+            
+            <!-- GALERİ FOTOĞRAF 2 - aksiyon2.png BURAYA -->
+            <div class="gallery-item gallery2" onclick="openModal('aksiyon2.png')">
+                <img src="aksiyon2.png" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+            </div>
+            
+            <!-- GALERİ FOTOĞRAF 3 - aksiyon3.png BURAYA -->
+            <div class="gallery-item gallery3" onclick="openModal('aksiyon3.png')">
+                <img src="aksiyon3.png" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+            </div>
+            
+            <!-- GALERİ FOTOĞRAF 4 - aksiyon4.png BURAYA -->
+            <div class="gallery-item gallery4" onclick="openModal('aksiyon4.png')">
+                <img src="aksiyon4.png" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+            </div>
+            
+            <!-- GALERİ FOTOĞRAF 5 - aksiyon5.png BURAYA -->
+            <div class="gallery-item gallery5" onclick="openModal('aksiyon5.png')">
+                <img src="aksiyon5.png" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+            </div>
+            
+            <!-- GALERİ FOTOĞRAF 6 - aksiyon6.png BURAYA -->
+            <div class="gallery-item gallery6" onclick="openModal('aksiyon6.png')">
+                <img src="aksiyon6.png" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL (POPUP) -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <!-- MISSION SECTION -->
+    <section class="mission">
+        <h2>Misyonumuz</h2>
+        <div class="mission-content">
+            <p>
+                Her gün dünyayı daha güvenli bir yer yapmak için çalışıyoruz. Tehlikeli 
+                suçlulardan, dünya çapındaki tehditlere kadar her türlü kötülükle savaşıyoruz.
+            </p>
+            <p>
+                Birlik ve dayanışma gücümüzdür. Birlikte, imkansız gibi görünen zorlukların 
+                üstesinden geliyoruz. Çünkü biz sadece kahramanlar değil, bir aileyiz!
+            </p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 Süper Kahraman Komitesi | Dünyayı Korumak İçin Buradayız</p>
+    </footer>
+
+    <script>
+        function openModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'block';
+            modalImg.src = imageSrc;
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // ESC tuşuyla kapatma
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
